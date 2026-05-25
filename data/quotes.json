@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-25T00:14:27.251Z",
+  "generatedAt": "2026-05-25T00:38:25.793Z",
   "source": "synthetic",
   "tickers": {
     "GW150914": {
       "ticker": "GW150914",
       "price": 28.6,
       "prevClose": 28.700454386015714,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -106,7 +106,7 @@
       "ticker": "GW170817",
       "price": 1.188,
       "prevClose": 1.1883974322622943,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -206,7 +206,7 @@
       "ticker": "GW190521",
       "price": 65.1,
       "prevClose": 66.14043129900506,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -306,7 +306,7 @@
       "ticker": "GW200115",
       "price": 5.9,
       "prevClose": 5.883510472795472,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -406,7 +406,7 @@
       "ticker": "GW230529",
       "price": 3.6,
       "prevClose": 3.6134010589643273,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -506,7 +506,7 @@
       "ticker": "GW231123",
       "price": 95.4,
       "prevClose": 95.48902270420412,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -606,7 +606,7 @@
       "ticker": "GW170814",
       "price": 24.1,
       "prevClose": 24.089247470664215,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -706,7 +706,7 @@
       "ticker": "GW170608",
       "price": 7.9,
       "prevClose": 7.854547192732299,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -806,7 +806,7 @@
       "ticker": "GW190412",
       "price": 13.2,
       "prevClose": 13.178978375248798,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -906,7 +906,7 @@
       "ticker": "GW190814",
       "price": 6.1,
       "prevClose": 6.132818587816355,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -1006,7 +1006,7 @@
       "ticker": "GW240817",
       "price": 32.4,
       "prevClose": 32.455688792981846,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [
@@ -1106,7 +1106,7 @@
       "ticker": "GW250121",
       "price": 41.7,
       "prevClose": 41.984258057716914,
-      "ts": 1779668067251,
+      "ts": 1779669505793,
       "currency": "USD",
       "exchange": "SIM",
       "closes": [

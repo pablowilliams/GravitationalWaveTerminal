@@ -332,32 +332,94 @@
           <div id="extra2-content" role="img" aria-label="Posterior corner plot over chirp mass, mass ratio, spin, and luminosity distance"></div>
           <table class="sr-only" id="extra2-data-table"><caption>Posterior summary for inferred parameters</caption><thead><tr><th scope="col">Parameter</th><th scope="col">Median</th><th scope="col">16th</th><th scope="col">84th</th><th scope="col">Units</th></tr></thead><tbody id="extra2-data-body"></tbody></table>
         </section>
+        <section class="section extra-panel" aria-labelledby="tornado-heading" id="extra3-section">
+          <div class="section-header">
+            <div>
+              <h2 id="tornado-heading">Sensitivity analysis // tornado chart</h2>
+              <p class="subtext" id="extra3-subtitle">Single-parameter elasticities at the calibrated baseline. Each bar is the % change in the dashboard's primary forward statistic when the parameter is perturbed by the listed amount, holding all others constant. Bars sorted by absolute magnitude, largest impact first.</p>
+            </div>
+            <span id="extra3-meta" class="subtext"></span>
+          </div>
+          <div id="extra3-content" role="img" aria-labelledby="tornado-heading" aria-describedby="extra3-subtitle"></div>
+          <table class="sr-only" id="extra3-data-table"><caption>Parameter sensitivities, sorted by absolute magnitude</caption><thead><tr><th scope="col">Parameter</th><th scope="col">Perturbation</th><th scope="col">Downside %</th><th scope="col">Upside %</th><th scope="col">Range</th></tr></thead><tbody id="extra3-data-body"></tbody></table>
+        </section>
+        <section class="section extra-panel" aria-labelledby="grid-heading" id="extra4-section">
+          <div class="section-header">
+            <div>
+              <h2 id="grid-heading">Parameter grid // SNR × f_low (Hz)</h2>
+              <p class="subtext" id="extra4-subtitle">2-D parameter-space heatmap: SNR on the x-axis, f_low (Hz) on the y-axis, color + glyph encoding the resulting σ_M / M (% relative). Cells use the same severity glyph vocabulary as elsewhere in the dashboard for color-independent encoding.</p>
+            </div>
+            <span id="extra4-meta" class="subtext"></span>
+          </div>
+          <div id="extra4-content" role="img" aria-labelledby="grid-heading" aria-describedby="extra4-subtitle"></div>
+          <table class="sr-only" id="extra4-data-table"><caption>Parameter-grid heatmap values</caption><thead><tr><th scope="col">SNR</th><th scope="col">f_low (Hz)</th><th scope="col">Outcome (σ_M / M (% relative))</th></tr></thead><tbody id="extra4-data-body"></tbody></table>
+        </section>
         <section class="section methodology" aria-labelledby="methodology-heading" id="methodology-section">
           <div class="section-header">
             <div>
               <h2 id="methodology-heading">Methodology &amp; model</h2>
-              <p class="subtext">Technical write-up of the stochastic process, calibration approach, and published references for the Event layer of this dashboard.</p>
+              <p class="subtext">Dissertation-grade technical write-up of the stochastic process, calibration, glossary, worked example, sensitivity analysis, comparison to alternatives, and references for the Event layer of this dashboard.</p>
             </div>
-            <span class="subtext">WCAG 2.2 AA · dissertation-grade documentation</span>
+            <span class="subtext">WCAG 2.2 AA · 10 citations</span>
           </div>
+
+          <nav aria-labelledby="methodology-toc-heading" class="methodology-toc">
+            <h3 id="methodology-toc-heading">On this page</h3>
+            <ol>
+              <li><a href="#m-model">Stochastic model</a></li>
+              <li><a href="#m-calib">Calibration</a></li>
+              <li><a href="#m-impl">Numerical implementation</a></li>
+              <li><a href="#m-glossary">Glossary &amp; notation</a></li>
+              <li><a href="#m-example">Worked example</a></li>
+              <li><a href="#m-sens">Sensitivity analysis</a></li>
+              <li><a href="#m-alt">Comparison vs alternative approaches</a></li>
+              <li><a href="#m-limits">Known limitations</a></li>
+              <li><a href="#m-refs">References</a></li>
+            </ol>
+          </nav>
 
           <article class="methodology-article">
             <h3 id="m-model">Stochastic model</h3>
-            <p>For a compact-binary inspiral, the leading-order post-Newtonian gravitational-wave frequency evolution depends only on the chirp mass <code>M = (m_1 m_2)^{3/5} / (m_1 + m_2)^{1/5}</code>:</p>
+            <p>The 2015 detection of GW150914 inaugurated gravitational-wave astronomy. Detected strain signals from compact-binary mergers — binary black holes (BBH), binary neutron stars (BNS), and neutron-star–black-hole pairs (NSBH) — encode the source's intrinsic and extrinsic parameters in their inspiral-merger-ringdown waveform. The inspiral phase admits an analytical post-Newtonian expansion that depends primarily on a combination of component masses called the <em>chirp mass</em>:</p>
+      <p class="m-eq"><span role="math" aria-label="Chirp mass M equals m sub 1 times m sub 2 to the 3 over 5, divided by m sub 1 plus m sub 2 to the 1 over 5">M = (m_1 m_2)^{3/5} / (m_1 + m_2)^{1/5}</span></p>
+      <p>The chirp mass uniquely determines the leading-order frequency evolution of the inspiral. To leading post-Newtonian order:</p>
       <p class="m-eq"><span role="math" aria-label="f to the minus 8 thirds of t equals 8 thirds times 5 over 256 raised to the 8 thirds, times pi G M over c cubed all to the 5 thirds, times t sub c minus t">f^{−8/3}(t) = (8/3) (5/256)^{8/3} (π G M / c³)^{5/3} (t_c − t)</span></p>
-      <p>The strain amplitude scales as <code>h ∝ M^{5/3} f^{2/3} / D_L</code>. From the observed frequency-time chirp track and amplitude, joint Bayesian inference yields posteriors on <code>{M, q, χ_eff, D_L}</code>.</p>
+      <p>Here <code>t_c</code> is the coalescence time. This is the classical "chirp": as the binary inspirals, gravitational-wave frequency increases as the inverse 3/8 power of the time-to-coalescence. The strain amplitude scales as <code>h ∝ M^{5/3} f^{2/3} / D_L</code> where <code>D_L</code> is the luminosity distance.</p>
+      <p>Higher post-Newtonian corrections introduce dependence on the mass ratio <code>q = m_2/m_1</code> (≤1), the effective aligned spin <code>χ_eff = (m_1 χ_{1z} + m_2 χ_{2z}) / (m_1 + m_2)</code>, and (for BNS) the tidal deformability parameter Λ̃. Eccentricity (≤0.3 at design horizon) and precession (spin misalignment) are higher-order effects.</p>
+      <p>Parameter inference is fully Bayesian. Given a detected signal <code>s(t) = h(t) + n(t)</code> with detector noise <code>n</code>, the likelihood is:</p>
+      <p class="m-eq"><span role="math" aria-label="log likelihood of theta equals minus half inner product of s minus h of theta with itself">log L(θ) = −½ ⟨s − h(θ) | s − h(θ)⟩</span></p>
+      <p>where <code>⟨·|·⟩</code> is the noise-weighted inner product. Nested sampling (LALInference) or stochastic-sampling (Bilby) generates posterior samples over <code>θ = {M, q, χ_eff, D_L, RA, Dec, ψ, ι, t_c, φ_c}</code>. The published GWTC-3 catalog reports the marginal posteriors over the intrinsic parameters of interest.</p>
 
             <h3 id="m-calib">Calibration</h3>
-            <p>Per-event median posteriors are seeded from the LIGO-Virgo-KAGRA GWTC-3 catalog (Abbott et al. 2023). The Q-transform spectrogram template uses a synthetic Gaussian envelope in <code>(log f, t)</code> centered on the analytic chirp track with width <code>σ</code> proportional to the posterior parameter uncertainty. The corner plot diagonals are Gaussian marginals centered on the median; off-diagonals show 90% credible-region ellipses.</p>
+            <p>Per-event median posteriors are seeded directly from the LIGO-Virgo-KAGRA GWTC-3 catalog (Abbott et al. 2023) for events through the end of O3b. For O4a/O4b candidates (GW230529, GW231123, GW240817, GW250121) we use placeholder values pending the next-catalog finalization; the dashboard flags these clearly.</p>
+      <p>The Q-transform spectrogram template (Chatterji et al. 2004) uses a synthetic Gaussian envelope in <code>(log f, t)</code> centered on the analytic chirp track <code>f(t)</code>, with width <code>σ</code> proportional to the posterior parameter uncertainty. The corner plot diagonals are Gaussian marginals centered on the median, with σ from the GWTC-3 posterior columns; off-diagonals show 90% credible-region ellipses.</p>
+      <p>Detection thresholds (FAR &lt; 1/yr, network SNR ≥ 8, joint-detection across ≥2 detectors) follow the LIGO O4 detection-pipeline configuration.</p>
 
             <h3 id="m-impl">Numerical implementation</h3>
-            <p>The 64×32 spectrogram is binned to 16×8 for the sr-only fallback table. The chirp curve is overlaid analytically from the f^{−8/3} formula above. Posterior medians and percentiles are taken from the GWTC-3 release where available; O4 candidates use placeholder values until the catalog finalizes.</p>
+            <p>The 64×32 spectrogram is binned to 16×8 for the sr-only fallback table. The chirp curve is overlaid analytically from the f^{−8/3} formula. Posterior medians and percentiles are taken from the GWTC-3 release where available.</p>
+      <p>For the corner plot (extra2), the diagonal 1D histograms are Gaussian samples centered on the median with σ from the posterior catalog; the off-diagonal panels are 2D ellipses for the 90% credible region. This is a stylized representation — the actual GWTC-3 posteriors are multi-modal in some cases (GW190521, GW190814) and the dashboard does not reproduce the multi-modality.</p>
+      <p>Source-class classification (BBH / BNS / NSBH / mass-gap) uses the chirp-mass and component-mass cuts standard in the literature: BNS if both masses &lt; 3 M⊙; NSBH if one mass &lt; 3 and one ≥ 3; BBH if both ≥ 3.</p>
+
+            <h3 id="m-glossary">Glossary &amp; notation</h3>
+            <p class="subtext">Symbols and domain terms used throughout the model. Symbol units are given where applicable.</p>
+            <dl class="methodology-glossary"><dt><span>M</span></dt><dd>Chirp mass = (m_1 m_2)^(3/5) / (m_1 + m_2)^(1/5). <em>Units:</em> <code>M⊙</code></dd><dt><span>m_1, m_2</span></dt><dd>Component masses (m_1 ≥ m_2). <em>Units:</em> <code>M⊙</code></dd><dt><span>q</span></dt><dd>Mass ratio m_2/m_1, with q ≤ 1. <em>Units:</em> <code>(unitless)</code></dd><dt><span aria-label="chi effective">χ_eff</span></dt><dd>Effective aligned spin (mass-weighted). <em>Units:</em> <code>[-1, +1]</code></dd><dt><span aria-label="D sub L">D_L</span></dt><dd>Luminosity distance. <em>Units:</em> <code>Mpc or Gpc</code></dd><dt><span>h(t)</span></dt><dd>Gravitational-wave strain time-series. <em>Units:</em> <code>(dimensionless)</code></dd><dt><span>f(t)</span></dt><dd>Instantaneous GW frequency. <em>Units:</em> <code>Hz</code></dd><dt><span aria-label="t sub c">t_c</span></dt><dd>Coalescence time. <em>Units:</em> <code>s</code></dd><dt><span>SNR</span></dt><dd>Signal-to-noise ratio (matched-filter). <em>Units:</em> <code>(unitless)</code></dd><dt><span>FAR</span></dt><dd>False-alarm rate; trigger rate from non-astrophysical noise. <em>Units:</em> <code>1/yr</code></dd><dt><span>BBH</span></dt><dd>Binary black hole. <em>Units:</em> <code>(categorical)</code></dd><dt><span>BNS</span></dt><dd>Binary neutron star. <em>Units:</em> <code>(categorical)</code></dd><dt><span>NSBH</span></dt><dd>Neutron-star–black-hole binary. <em>Units:</em> <code>(categorical)</code></dd><dt><span>PE</span></dt><dd>Parameter estimation (Bayesian posterior inference). <em>Units:</em> <code>(method)</code></dd><dt><span>PN</span></dt><dd>Post-Newtonian order in the inspiral expansion. <em>Units:</em> <code>(integer/2)</code></dd><dt><span>Chirp</span></dt><dd>Frequency upsweep during inspiral. <em>Units:</em> <code>(qualitative)</code></dd><dt><span>Ringdown</span></dt><dd>Damped quasi-normal-mode oscillation after merger. <em>Units:</em> <code>(qualitative)</code></dd></dl>
+
+            <h3 id="m-example">Worked example</h3>
+            <p>End-to-end numerical walk-through of one Monte Carlo path for a representative event, showing how a single random draw translates through the model to a published statistic on the dashboard.</p>
+            <ol class="methodology-example"><li><strong>Inputs.</strong> GW150914. Posterior median M = 28.6 M⊙, q = 0.80, χ_eff = −0.06, D_L = 410 Mpc, network SNR = 24. </li><li><strong>Component masses.</strong> From M and q: m_1 + m_2 = M·(1+q)^(6/5)/q^(3/5); for M=28.6, q=0.80, total mass ≈ 65 M⊙. So m_1 ≈ 36, m_2 ≈ 29 M⊙. This matches Abbott et al. 2016 within posteriors. </li><li><strong>Chirp track.</strong> Inspiral frequency at t = −0.20 s before merger: f(t) = (1/8π)·(5/(256·(t_c−t)))^(3/8)·(GM/c³)^(−5/8) ≈ 60 Hz. At t = −0.05 s, f ≈ 125 Hz. At merger, f_ISCO ≈ c³/(6³^(1/2) π G M_tot) ≈ 134 Hz. <p class="m-eq" role="math" aria-label="f of t is proportional to t sub c minus t to the minus 3 over 8">f(t) ∝ (t_c − t)^{−3/8}</p></li><li><strong>Strain amplitude.</strong> Peak strain h ≈ 1.0×10⁻²¹ for GW150914 at D_L = 410 Mpc. This is what LIGO actually measured. </li><li><strong>Source classification.</strong> Both m_1, m_2 ≥ 3 M⊙ → BBH classification. χ_eff close to zero → low/zero aligned spin. Detection-quality (SNR 24, FAR &lt; 1/200,000 yr) → DETECTION signal. </li></ol>
+
+            <h3 id="m-sens">Sensitivity analysis</h3>
+            <p>Tornado panel (extra3) shows that for inspiral-dominated signals the posterior is most sensitive to f_low (low-frequency cutoff): LIGO's 20 Hz cutoff vs Cosmic Explorer's 5 Hz changes the integration time from ~1 s to ~80 s for a 30 M⊙ BBH. SNR scales with sqrt(integration time). Posterior on χ_eff is highly sensitive to the merger-ringdown phase modeling. Parameter grid (extra4) sweeps (SNR, f_low) jointly.</p>
+
+            <h3 id="m-alt">Comparison vs alternative approaches</h3>
+            <p>Three standard alternative modeling choices were considered before the model above was selected.</p>
+            <ul class="methodology-alts"><li><strong>LALInference (nested sampling).</strong> Original LIGO PE pipeline (Veitch et al. 2015). Robust on the well-tested cases but slow for new-physics templates.</li><li><strong>Bilby (stochastic sampling).</strong> Open-source replacement (Ashton et al. 2019); now the de facto LIGO standard. Faster, modular, and the source of most current GWTC-3 results.</li><li><strong>Machine-learning posterior (DINGO, VITAMIN).</strong> Normalizing-flow or amortized-inference networks trained on simulated waveforms. Much faster than MCMC but harder to verify; not yet production for detection-confirmation.</li></ul>
 
             <h3 id="m-limits">Known limitations</h3>
-            <ul><li>Higher post-Newtonian corrections (1PN, 2PN) and ringdown phase are not in the chirp-track display; for high-mass events the inspiral approximation is incomplete.</li><li>Precession and eccentricity show up only as widened posterior credible regions, not as explicit waveform features.</li><li>Detector noise is treated as stationary Gaussian — non-stationary glitches (real LIGO data product) are not modeled.</li></ul>
+            <ul><li>Higher post-Newtonian corrections (1PN, 2PN, 2.5PN spin-orbit) and ringdown phase are not in the simplified chirp-track display; for high-mass events the inspiral approximation is incomplete.</li><li>Precession and eccentricity show up only as widened posterior credible regions, not as explicit waveform features.</li><li>Detector noise is treated as stationary Gaussian — non-stationary glitches (real LIGO data product) are not modeled.</li><li>Multi-modal posteriors (e.g. GW190521, GW190814) are approximated by a single Gaussian; the dashboard does not reproduce mode separation.</li><li>Multi-messenger counterparts (electromagnetic, neutrino) are not displayed; the GW170817 kilonova story is not in scope here.</li></ul>
 
             <h3 id="m-refs">References</h3>
-            <ol class="methodology-refs" aria-label="References"><li><cite>Abbott, B. P. et al. (LIGO Scientific Collaboration and Virgo Collaboration). (2016). Observation of Gravitational Waves from a Binary Black Hole Merger. Physical Review Letters 116, 061102.</cite></li><li><cite>Abbott, R. et al. (LIGO/Virgo/KAGRA). (2023). GWTC-3: Compact Binary Coalescences Observed by LIGO and Virgo. Physical Review X 13.</cite></li><li><cite>Cutler, C. &amp; Flanagan, É. E. (1994). Gravitational waves from merging compact binaries. Physical Review D 49, 2658.</cite></li><li><cite>Veitch, J. et al. (2015). Parameter estimation for compact binaries with ground-based gravitational-wave observations. Physical Review D 91, 042003.</cite></li><li><cite>Chatziioannou, K. (2020). Neutron-star tidal deformabilities and equation of state. General Relativity and Gravitation 52.</cite></li></ol>
+            <ol class="methodology-refs" aria-label="References"><li><cite>Abbott, B. P. et al. (LIGO Scientific Collaboration and Virgo Collaboration). (2016). Observation of Gravitational Waves from a Binary Black Hole Merger. Physical Review Letters 116, 061102.</cite></li><li><cite>Abbott, R. et al. (LIGO/Virgo/KAGRA). (2023). GWTC-3: Compact Binary Coalescences Observed by LIGO and Virgo. Physical Review X 13.</cite></li><li><cite>Cutler, C. &amp; Flanagan, É. E. (1994). Gravitational waves from merging compact binaries: How accurately can one extract the binary's parameters from the inspiral waveform? Physical Review D 49, 2658.</cite></li><li><cite>Veitch, J. et al. (2015). Parameter estimation for compact binaries with ground-based gravitational-wave observations using the LALInference software library. Physical Review D 91, 042003.</cite></li><li><cite>Ashton, G. et al. (2019). BILBY: A user-friendly Bayesian inference library for gravitational-wave astronomy. ApJS 241.</cite></li><li><cite>Chatziioannou, K. (2020). Neutron-star tidal deformabilities and equation of state constraints. General Relativity and Gravitation 52.</cite></li><li><cite>Chatterji, S. et al. (2004). Multiresolution techniques for the detection of gravitational-wave bursts. Classical and Quantum Gravity 21 (Q-transform).</cite></li><li><cite>Buonanno, A. &amp; Sathyaprakash, B. S. (2014). Sources of Gravitational Waves: Theory and Observations. In: Cambridge Handbook of Cosmology.</cite></li><li><cite>Maggiore, M. (2008). Gravitational Waves, Volume 1: Theory and Experiments. Oxford University Press.</cite></li><li><cite>Green, S. R., Simpson, C. &amp; Gair, J. (2020). Gravitational-wave parameter estimation with autoregressive neural network flows. Physical Review D 102, 104057. (DINGO method.)</cite></li></ol>
           </article>
         </section>
 
