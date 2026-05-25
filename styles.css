@@ -1899,13 +1899,79 @@ table.stocks td.num { font-variant-numeric: tabular-nums; }
 
 
 
-/* GRAVWAVE — physics-paper minimalism: no overlay, denser text, pinkish accent */
+/* GRAVWAVE — physics-paper minimalism with Source Serif 4 prose + Inter UI */
+:root {
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-sans: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Source Serif 4", "Source Serif Pro", Charter, Georgia, serif;
+}
+
+/* Switch global body to Inter for UI rhythm */
+html, body { font-family: var(--font-sans); font-size: 13.5px; line-height: 1.5; letter-spacing: 0; }
+
+/* Keep mono for data-dense surfaces (tables, ticker, term-strip, KPI values, equations, code) */
+.term-strip,
+.ticker-tape,
+.ticker-tape-wrap,
+table.stocks,
+table.stocks th,
+table.stocks td,
+.kpi-value,
+.rail-box-value,
+.methodology-article code,
+.methodology-glossary dt,
+.methodology-article p.m-eq,
+.methodology-article p.m-eq [role="math"],
+[role="math"],
+.heatmap .heat-tile,
+.pressure-num,
+#mc-counter,
+#mc-day-label {
+  font-family: var(--font-mono);
+}
+
+/* Headings + brand → Inter (clean, paper-like) */
+.app-header h1,
+.section h2,
+.section h3,
+.section h4,
+.methodology-article h3 { font-family: var(--font-sans); }
+
+/* Long-form prose → Source Serif 4 for academic readability */
+.app-header .subtitle,
+.methodology-article p,
+.methodology-article ul li,
+.methodology-article ol.methodology-refs li,
+.methodology-article ol.methodology-example li,
+.methodology-glossary dd,
+.methodology-alts li,
+.subtext { font-family: var(--font-serif); }
+
+/* Paper-like rhythm */
 body::before {
   background: radial-gradient(ellipse at 50% 0%, rgba(255, 102, 170, 0.035), transparent 70%);
 }
-.app-header h1 { letter-spacing: 0.06em; font-weight: 600; }
-.app-header .subtitle { max-width: 760px; font-size: 11.5px; line-height: 1.62; }
-.kpi-value { font-weight: 700; letter-spacing: -0.01em; font-feature-settings: "tnum" 1; }
+.app-header h1 { letter-spacing: 0.04em; font-weight: 700; font-size: 16px; }
+.app-header .subtitle { max-width: 780px; font-size: 13px; line-height: 1.65; letter-spacing: 0.005em; }
+.kpi-value { font-weight: 700; letter-spacing: -0.01em; font-feature-settings: "tnum" 1; font-size: 22px; }
 .section { border-radius: 2px; }
-.section h2 { letter-spacing: 0.08em; font-weight: 700; }
-.methodology-article p { font-size: 12.5px; line-height: 1.72; }
+.section h2 { letter-spacing: 0.06em; font-weight: 700; font-size: 12px; }
+.section h3 { font-weight: 700; font-size: 13px; letter-spacing: 0.04em; }
+.methodology-article p { font-size: 13.5px; line-height: 1.66; }
+.methodology-article p.m-eq { font-size: 12.5px; line-height: 1.55; }
+.methodology-article h3 { font-size: 12.5px; letter-spacing: 0.10em; }
+.methodology-glossary dd { font-size: 13px; line-height: 1.6; }
+.methodology-refs li { font-size: 13px; line-height: 1.6; }
+.methodology-toc { background: rgba(255, 102, 170, 0.03); }
+.methodology-toc h3 { font-family: var(--font-sans); font-weight: 700; }
+.methodology-toc a { font-family: var(--font-sans); font-size: 12px; }
+.btn { font-family: var(--font-sans); letter-spacing: 0.10em; }
+.field label,
+.kpi-label,
+.rail-box-label { font-family: var(--font-sans); letter-spacing: 0.10em; }
+.strategy-chip { font-family: var(--font-sans); }
+.strategy-fieldset legend { font-family: var(--font-sans); }
+.app-footer { font-family: var(--font-sans); }
+
+/* Citations italicized in serif */
+cite { font-style: italic; color: var(--text); }

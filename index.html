@@ -8,7 +8,7 @@
 <meta name="description" content="Terminal-style chirp-mass posterior Monte Carlo dashboard for LIGO-Virgo-KAGRA gravitational-wave events, with Q-transform spectrograms, 4D posterior corner plots, and PE-pipeline sentiment." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -85,7 +85,7 @@
 
       <div class="strategy-bar">
         <fieldset class="strategy-fieldset">
-          <legend>Trading strategies <span class="legend-hint">pick one or more — signals combine</span></legend>
+          <legend>Inference strategies <span class="legend-hint">pick one or more — signals combine</span></legend>
           <div class="strategy-options" id="strategy-options"></div>
         </fieldset>
       </div>
@@ -366,6 +366,7 @@
           <nav aria-labelledby="methodology-toc-heading" class="methodology-toc">
             <h3 id="methodology-toc-heading">On this page</h3>
             <ol>
+              <li><a href="#m-abstract">Abstract</a></li>
               <li><a href="#m-model">Stochastic model</a></li>
               <li><a href="#m-calib">Calibration</a></li>
               <li><a href="#m-impl">Numerical implementation</a></li>
@@ -379,6 +380,9 @@
           </nav>
 
           <article class="methodology-article">
+            <h3 id="m-abstract">Abstract</h3>
+            <p>This dashboard implements a Bayesian parameter-estimation inference layer over compact-binary gravitational-wave events from the LIGO-Virgo-KAGRA observatories. Per-event posteriors over chirp mass, mass ratio, effective aligned spin, and luminosity distance are seeded from the GWTC-3 catalog (<cite>Abbott et al., 2023</cite>) following the methodology established for the first direct detection GW150914 (<cite>Abbott et al., 2016</cite>). Inspiral-merger-ringdown waveform templates follow the post-Newtonian framework (<cite>Cutler &amp; Flanagan, 1994</cite>); modern stochastic sampling via Bilby (<cite>Ashton et al., 2019</cite>) is preferred over the original LALInference nested-sampling for speed and modularity. The Q-transform spectrogram (<cite>Chatterji et al., 2004</cite>) and 4D corner plot present the joint posterior structure that single-marginal histograms cannot.</p>
+
             <h3 id="m-model">Stochastic model</h3>
             <p>The 2015 detection of GW150914 inaugurated gravitational-wave astronomy. Detected strain signals from compact-binary mergers — binary black holes (BBH), binary neutron stars (BNS), and neutron-star–black-hole pairs (NSBH) — encode the source's intrinsic and extrinsic parameters in their inspiral-merger-ringdown waveform. The inspiral phase admits an analytical post-Newtonian expansion that depends primarily on a combination of component masses called the <em>chirp mass</em>:</p>
       <p class="m-eq"><span role="math" aria-label="Chirp mass M equals m sub 1 times m sub 2 to the 3 over 5, divided by m sub 1 plus m sub 2 to the 1 over 5">M = (m_1 m_2)^{3/5} / (m_1 + m_2)^{1/5}</span></p>
